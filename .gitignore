@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
+
+# TDD-Guard runtime artifacts (only instructions.md is committed)
+/.claude/tdd-guard/data/*
+!/.claude/tdd-guard/data/instructions.md
+
+# Personal roadmap (local-only)
+/prologue-roadmap.md
