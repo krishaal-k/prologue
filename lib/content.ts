@@ -21,8 +21,15 @@ export async function getAllPosts(): Promise<Post[]> {
     files
       .filter((f) => f.endsWith(".mdx"))
       .map(async (file): Promise<Post> => {
-        const raw = await fs.readFile(path.join(BLOGS_DIR, file), "utf8");
-        const { data, content } = matter(raw);
+        const fullPath = path.join(BLOGS_DIR, file);
+        const raw = await fs.readFile(fullPath, "utf8");
+        let parsed;
+        try {
+          parsed = matter(raw);
+        } catch (err) {
+          throw new Error(`Failed to parse frontmatter in ${file}: ${(err as Error).message}`);
+        }
+        const { data, content } = parsed;
         return {
           slug: file.replace(/\.mdx$/, ""),
           title: String(data.title),
@@ -62,8 +69,15 @@ export async function getAllProjects(): Promise<Project[]> {
     files
       .filter((f) => f.endsWith(".mdx"))
       .map(async (file): Promise<Project> => {
-        const raw = await fs.readFile(path.join(PROJECTS_DIR, file), "utf8");
-        const { data, content } = matter(raw);
+        const fullPath = path.join(PROJECTS_DIR, file);
+        const raw = await fs.readFile(fullPath, "utf8");
+        let parsed;
+        try {
+          parsed = matter(raw);
+        } catch (err) {
+          throw new Error(`Failed to parse frontmatter in ${file}: ${(err as Error).message}`);
+        }
+        const { data, content } = parsed;
         const status = data.status === "live" || data.status === "archived" ? data.status : "wip";
         return {
           slug: file.replace(/\.mdx$/, ""),

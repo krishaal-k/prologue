@@ -1,4 +1,6 @@
 import { describe, it, expect } from "vitest";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { getAllPosts, getPostBySlug, getAllProjects, getProjectBySlug } from "./content";
 
 describe("getAllPosts", () => {
@@ -51,5 +53,18 @@ describe("getProjectBySlug", () => {
   it("returns null when slug does not exist", async () => {
     const project = await getProjectBySlug("nope");
     expect(project).toBeNull();
+  });
+});
+
+describe("malformed frontmatter", () => {
+  const broken = path.join(process.cwd(), "content", "blogs", "__broken__.mdx");
+
+  afterAll(async () => {
+    await fs.unlink(broken).catch(() => {});
+  });
+
+  it("throws an error including the offending filename", async () => {
+    await fs.writeFile(broken, "---\nthis is: : invalid yaml: : \n---\nbody\n", "utf8");
+    await expect(getAllPosts()).rejects.toThrow(/__broken__\.mdx/);
   });
 });
