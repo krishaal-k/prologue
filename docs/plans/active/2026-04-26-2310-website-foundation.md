@@ -100,7 +100,9 @@ Before Task 0:
     --color-accent: #e3a44a;
     --color-paper: #f4e2c7;
     --color-muted: #b8a98a;
+  }
 
+  @theme inline {
     --font-sans: var(--font-geist-sans);
     --font-serif: var(--font-fraunces);
     --font-mono: var(--font-geist-mono);
@@ -114,7 +116,7 @@ Before Task 0:
   }
   ```
 
-  Note: the Tailwind v4 `@theme` block (NOT `@theme inline`) exposes the tokens as utility classes. The previous `:root` light/dark variables and `prefers-color-scheme` block are removed — site is always dark.
+  Note: bare `@theme` is used for static color hex values; `@theme inline` is used for the font tokens because they reference `var(--font-*)` CSS variables that `next/font` injects on `<html>`. Per Tailwind v4 docs, mixing scopes without `inline` produces resolution surprises. The previous `:root` light/dark variables and `prefers-color-scheme` block are removed — site is always dark.
 
 - [ ] **Step 2: Add Fraunces to `app/layout.tsx`**
 
