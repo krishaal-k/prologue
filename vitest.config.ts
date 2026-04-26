@@ -13,6 +13,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
+    exclude: ['**/node_modules/**', '**/dist/**', 'e2e/**'],
     reporters: [
       'default',
       ['tdd-guard-vitest', { projectRoot: process.cwd() }],
