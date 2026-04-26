@@ -1,6 +1,6 @@
 # Agent Workflow Reference
 
-_Last updated: 2026-04-26_
+_Last updated: 2026-04-27_
 
 When you're at step **X**, reach for tool **Y**. For where each tool lives and how it's installed, see [`agent-tooling.md`](agent-tooling.md).
 

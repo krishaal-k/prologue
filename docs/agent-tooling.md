@@ -1,6 +1,6 @@
 # Agent Tooling Registry
 
-_Last updated: 2026-04-26_
+_Last updated: 2026-04-27_
 
 The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflow.md).
 
