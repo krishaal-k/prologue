@@ -55,6 +55,14 @@ The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflo
 - Source: `@magicuidesign/mcp` (npm, official, registered via `claude mcp add magicui`)
 - Magic UI component metadata + scaffolds for animated React + Tailwind primitives (marquees, blur fades, beams, etc.).
 
+### `context7`
+- Source: `@upstash/context7-mcp` (npm)
+- Always-fresh, version-pinned library docs (Next.js 16, React 19, Tailwind v4, etc.) injected into prompts. Counters the `AGENTS.md` "this is NOT the Next.js you know" risk.
+
+### `serena`
+- Source: `oraios/serena` (Python, run via `uvx`; requires `uv` from Homebrew)
+- LSP-backed semantic code retrieval, definition / references, symbol-aware rename and cross-file refactor.
+
 ### `ide`
 - Source: built-in (default config)
 - `executeCode`, `getDiagnostics` for the active IDE.
@@ -95,3 +103,5 @@ These appear once here; surfaced in `workflow.md`'s top-of-file callout (not per
 - frontend-design — https://github.com/anthropics/claude-plugins-official
 - wshobson/agents (c4-architecture host) — https://github.com/wshobson/agents
 - Magic UI MCP — https://github.com/magicuidesign/magicui
+- context7 — https://github.com/upstash/context7
+- serena — https://github.com/oraios/serena

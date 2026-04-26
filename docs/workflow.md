@@ -70,16 +70,30 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 ## 3. Build
 
 ### 3.1 Plan & delegate
-
-_(filled in Task 8)_
+**Primary:** `superpowers:writing-plans` + `superpowers:subagent-driven-development` — produces a structured plan in `docs/plans/active/`, then dispatches a fresh subagent per task with two-stage review (spec compliance → code quality).
+**When to use:** Default for any non-trivial implementation. The pair gives you scoped context per task and an automatic review gate before each commit.
+**Alternatives:**
+- `compound-engineering` `/ce-plan` + `/ce-work` — newer alternative with deepening passes and parallel sub-agent review; reach for non-software plans or when you want a different orchestration style.
+- `codex:rescue` / `gemini:rescue` — when one task is stuck and you want a second-opinion implementation pass.
+**Registry:** [`superpowers`](agent-tooling.md#superpowers) · [`compound-engineering`](agent-tooling.md#compound-engineering)
 
 ### 3.2 Implement
-
-_(filled in Task 8)_
+**Primary:** Claude Code itself — the writer. The complement that matters most is fresh, version-correct documentation.
+**When to use:** Any time you write code. Pull `context7` proactively when touching Next.js 16, React 19, or Tailwind v4 surfaces (per `AGENTS.md`).
+**Alternatives:**
+- `context7` MCP — version-pinned framework docs on demand; counters the "this is NOT the Next.js you know" warning.
+- `serena` MCP — symbol-aware retrieval and cross-file edits when you're navigating an unfamiliar area or moving symbols.
+- `superpowers:test-driven-development` — for any feature or bugfix, before writing implementation code (TDD-Guard hooks gate `pnpm test`).
+**Registry:** [`context7`](agent-tooling.md#context7) · [`serena`](agent-tooling.md#serena) · [`superpowers`](agent-tooling.md#superpowers)
 
 ### 3.3 Refactor
-
-_(filled in Task 8)_
+**Primary:** `serena` MCP — LSP-backed rename and reference lookup; safer than text-level edits for type-aware moves.
+**When to use:** Any non-trivial rename, symbol move, or cross-file restructure. Also when you need a reference list before deleting something.
+**Alternatives:**
+- `superpowers:simplify` — review-driven pass to reduce a recently-changed area to its minimum.
+- `codex:rescue` — second-opinion pass when a refactor is stuck or has subtle correctness implications.
+- `ast-grep-mcp` — *(not installed; deferred until codebase-wide pattern rewrites become necessary)*.
+**Registry:** [`serena`](agent-tooling.md#serena) · [`superpowers`](agent-tooling.md#superpowers) · [`codex`](agent-tooling.md#codex)
 
 ## 4. Verify
 
