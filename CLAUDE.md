@@ -1,1 +1,55 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 @AGENTS.md
+
+## Commands
+
+```bash
+pnpm dev            # start dev server on http://localhost:3000
+pnpm build          # production build
+pnpm lint           # ESLint (v9 flat config)
+pnpm test           # Vitest in watch mode (unit/component, TDD-Guard gates this loop)
+pnpm test:run       # Vitest single run (use this for CI-style checks)
+pnpm test:e2e       # Playwright e2e (parallel slow loop, not gated by TDD-Guard)
+pnpm test:e2e:ui    # Playwright in UI mode for debugging
+```
+
+## Stack
+
+- **Next.js 16** — App Router only (no Pages Router). Read `node_modules/next/dist/docs/` before writing Next.js-specific code.
+- **React 19**
+- **TypeScript 5** — strict mode, path alias `@/*` → project root
+- **Tailwind CSS v4** — configured via `@tailwindcss/postcss` in `postcss.config.mjs`. There is no `tailwind.config.*` file; all theme customization goes through CSS `@theme` blocks. The `globals.css` uses `@import "tailwindcss"`, not `@tailwind base/components/utilities`.
+- **ESLint 9** — flat config in `eslint.config.mjs`
+- **pnpm** — use `pnpm` for all package operations
+
+## Architecture
+
+- App lives in `/app` (no `/src` wrapper). Route segments are directories under `/app`.
+- `app/layout.tsx` — root layout, loads Geist fonts, wraps all pages.
+- `app/page.tsx` — home page.
+- `app/globals.css` — Tailwind v4 import + CSS custom properties for light/dark theme.
+- No state management library is installed.
+
+## Tooling
+
+Project-scoped agent tooling beyond the global config:
+
+- **Testing**: Vitest for unit/component tests (`pnpm test`), Playwright for e2e (`pnpm test:e2e`). Configs at `vitest.config.ts` and `playwright.config.ts`. E2e specs live in `e2e/`.
+- **TDD-Guard is active** (`.claude/tdd-guard/data/instructions.md`) and wired to Vitest via `tdd-guard-vitest`. Red-Green-Refactor is hook-enforced on the Vitest loop: one failing test at a time, minimal implementation, refactor only with tests green. **It does NOT gate Playwright runs** — apply TDD discipline manually at the e2e layer (write the failing flow first), but treat it as a separate cadence from the inner unit loop.
+- **Codex plugin** (`codex@openai-codex`, project-scoped) — `/codex:rescue` to hand a stuck task or deeper investigation to GPT-5/Codex; `/codex:review` and `/codex:adversarial-review` for second-opinion review of pending changes. The `codex-rescue` subagent is also available via the Agent tool.
+- **Rubber Duck MCP** (`mcp-rubber-duck`) — exposes MCP tools that let Claude consult Claude/Codex/Gemini CLIs as "ducks" for quick second opinions inline (lighter-weight than spawning the rescue subagent).
+
+## Plans
+
+Implementation plans live in `docs/plans/{active,completed,abandoned}/` with filenames `YYYY-MM-DD-HHMM-{slug}.md`. When entering plan mode for new work, save there (not the Claude Code default `~/.claude/plans/` location). Move between subfolders to update status. Only `active/` is auto-loaded into context; `completed/` and `abandoned/` are reference-only — read on request.
+
+## Agent tooling reference
+
+Two complementary docs:
+- [`docs/workflow.md`](docs/workflow.md) — **when** to reach for a tool (activity-mapped, day-to-day reference).
+- [`docs/agent-tooling.md`](docs/agent-tooling.md) — **where** each tool lives (registry: source, scope, install, config).
+
+**Update rule:** when a plugin / skill / MCP server / subagent is added, removed, or reconfigured, update **both** files in the same change and bump each file's `Last updated` date.
