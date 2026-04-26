@@ -98,16 +98,29 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 ## 4. Verify
 
 ### 4.1 TDD inner loop
-
-_(filled in Task 9)_
+**Primary:** `superpowers:test-driven-development` + `tdd-guard` — Red-Green-Refactor is hook-enforced on the Vitest loop (`pnpm test`). One failing test at a time, minimal implementation, refactor only with tests green.
+**When to use:** Implementing any feature or bugfix at the unit / component level. Before writing implementation code.
+**Alternatives:**
+- Manual TDD discipline at the e2e layer — TDD-Guard does NOT gate Playwright; write the failing flow first, treat as a separate cadence.
+- Storybook MCP `@storybook/addon-mcp` — *(not installed; revisit if a Storybook workshop is adopted for component-level TDD)*.
+**Registry:** [`superpowers`](agent-tooling.md#superpowers) · [`tdd-guard`](agent-tooling.md#tdd-guard)
 
 ### 4.2 Regression / E2E
-
-_(filled in Task 9)_
+**Primary:** Playwright + Playwright MCP with built-in `toHaveScreenshot()` for visual regression — baselines committed to repo, free, no SaaS dependency. Specs live in `e2e/`.
+**When to use:** A user-facing flow is shipping; capture the golden path as an e2e spec, and capture key screens as visual baselines. Re-run after refactors or design changes.
+**Alternatives:**
+- `playwright-cli-agents` plugin — *(not installed; reconsider if the e2e backlog grows enough that planner / generator / healer agents pay off)*.
+- Chromatic / Percy / Applitools — *(not installed; commercial visual-regression services, excluded by project preference)*.
+**Registry:** [`playwright`](agent-tooling.md#playwright)
 
 ### 4.3 UI-UX QA & perf
-
-_(filled in Task 9)_
+**Primary:** `chrome-devtools` MCP — official Google ChromeDevTools server giving Lighthouse audits, perf traces, CrUX field data, console / network inspection, screenshots, and emulation through one server.
+**When to use:** Pre-merge perf or accessibility check on a changed page; hunting an LCP regression; verifying a fix landed against the metric you care about. Pair with `mcp__playwright__browser_navigate` to reach the URL.
+**Alternatives:**
+- `a11y-mcp` (axe-core MCP) — *(not installed; chrome-devtools-mcp's a11y coverage is sufficient for a portfolio's scale)*.
+- `unlighthouse` via `pnpm dlx unlighthouse --site http://localhost:3000` — site-wide pre-launch sweep across all routes; on-demand, no install.
+- Manual DevTools session in browser — when the MCP is overkill or you need a flame chart only humans can read.
+**Registry:** [`chrome-devtools`](agent-tooling.md#chrome-devtools) · [`playwright`](agent-tooling.md#playwright)
 
 ## 5. Ship & operate
 

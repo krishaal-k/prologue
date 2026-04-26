@@ -63,6 +63,10 @@ The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflo
 - Source: `oraios/serena` (Python, run via `uvx`; requires `uv` from Homebrew)
 - LSP-backed semantic code retrieval, definition / references, symbol-aware rename and cross-file refactor.
 
+### `chrome-devtools`
+- Source: `chrome-devtools-mcp` (npm, official Google ChromeDevTools)
+- Lighthouse audits, CrUX field data, performance traces, network and console inspection, DOM snapshots, screenshots, emulation. One MCP for perf + a11y + UI QA.
+
 ### `ide`
 - Source: built-in (default config)
 - `executeCode`, `getDiagnostics` for the active IDE.
@@ -105,3 +109,4 @@ These appear once here; surfaced in `workflow.md`'s top-of-file callout (not per
 - Magic UI MCP — https://github.com/magicuidesign/magicui
 - context7 — https://github.com/upstash/context7
 - serena — https://github.com/oraios/serena
+- chrome-devtools-mcp — https://github.com/ChromeDevTools/chrome-devtools-mcp
