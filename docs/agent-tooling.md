@@ -8,21 +8,48 @@ The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflo
 
 ## Plugins / Skills / Subagents
 
-| Tool | Type | Scope | Source | Notes |
-|---|---|---|---|---|
-| `superpowers` | plugin | user | `claude-plugins-official` | TDD / debug / collaboration skills library |
-| `tdd-guard` | plugin | user | `tdd-guard` | Hook-enforced RED-GREEN-REFACTOR on Vitest (`pnpm test`) |
-| `gemini` | plugin | user | `abiswas97-gemini` | Delegate to Gemini CLI; review / rescue commands |
-| `codex` | plugin | project | `openai-codex` | Delegate to Codex / GPT-5; review / rescue commands |
+### `superpowers`
+- Type: plugin · scope: user · source: `claude-plugins-official`
+- TDD / debug / collaboration skills library. Surfaces `superpowers:brainstorming`, `superpowers:writing-plans`, `superpowers:subagent-driven-development`, `superpowers:test-driven-development`, `superpowers:simplify`, etc.
+
+### `tdd-guard`
+- Type: plugin · scope: user · source: `tdd-guard`
+- Hook-enforced RED-GREEN-REFACTOR on Vitest (`pnpm test`). Project rules in `.claude/tdd-guard/data/instructions.md`.
+
+### `gemini`
+- Type: plugin · scope: user · source: `abiswas97-gemini`
+- Delegate to Gemini CLI; `/gemini:rescue`, `/gemini:setup`, review commands. Subagent: `gemini:gemini-rescue`.
+
+### `codex`
+- Type: plugin · scope: project · source: `openai-codex`
+- Delegate to Codex / GPT-5; `/codex:rescue`, `/codex:review`, `/codex:adversarial-review`. Subagent: `codex:codex-rescue`.
+
+### `compound-engineering`
+- Type: plugin · scope: user · source: `EveryInc/compound-engineering-plugin` (v3.1.0)
+- Bundle of `/ce-*` skills + sub-agents: `ce-ideate`, `ce-brainstorm`, `ce-plan`, `ce-work`, `ce-debug`, `ce-code-review`, `ce-frontend-design`, `ce-web-researcher`, `ce-resolve-pr-feedback`, etc.
+
+### `prd-taskmaster`
+- Type: skill · scope: user · source: `anombyte93/prd-taskmaster` (cloned to `~/.claude/skills/prd-taskmaster`)
+- Discovery interview → codebase analysis → detailed PRD with 13 automated quality checks; bridges to TaskMaster task breakdown.
 
 ## MCP servers
 
-| Server | Source | Config | Notes |
-|---|---|---|---|
-| `rubberduck-mcp` | `mcp-rubber-duck` (npm, `/opt/homebrew/bin/mcp-rubber-duck`) | env: `CLI_CODEX_ENABLED=true`, `CLI_GEMINI_ENABLED=true` | Inline ducks for Codex / Gemini |
-| `playwright` | Microsoft Playwright MCP | (default) | Browser automation, screenshots, console / network capture |
-| `ide` | Built-in | (default) | `executeCode`, `getDiagnostics` for active IDE |
-| Gmail / Google Calendar / Google Drive | claude.ai connectors | OAuth | Authed read / write of personal Google data |
+### `rubberduck-mcp`
+- Source: `mcp-rubber-duck` (npm, `/opt/homebrew/bin/mcp-rubber-duck`)
+- Config env: `CLI_CODEX_ENABLED=true`, `CLI_GEMINI_ENABLED=true`
+- Inline second-opinion ducks for Codex / Gemini. Tools: `ask_duck`, `chat_with_duck`, `compare_ducks`, `duck_council`.
+
+### `playwright`
+- Source: Microsoft Playwright MCP (default config)
+- Browser automation, screenshots, console / network capture, snapshots, navigation.
+
+### `ide`
+- Source: built-in (default config)
+- `executeCode`, `getDiagnostics` for the active IDE.
+
+### Google connectors (Gmail, Calendar, Drive)
+- Source: claude.ai connectors · OAuth
+- Authenticated read / write of personal Google data.
 
 ## Cross-cutting tools
 
@@ -51,3 +78,5 @@ These appear once here; surfaced in `workflow.md`'s top-of-file callout (not per
 - Gemini plugin — https://github.com/abiswas97/gemini-plugin-cc
 - Rubber Duck MCP — https://github.com/nesquikm/mcp-rubber-duck
 - Playwright MCP — https://github.com/microsoft/playwright-mcp
+- Compound Engineering — https://github.com/EveryInc/compound-engineering-plugin
+- prd-taskmaster — https://github.com/anombyte93/prd-taskmaster

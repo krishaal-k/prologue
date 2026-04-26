@@ -24,16 +24,28 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 ## 1. Define
 
 ### 1.1 Ideation
-
-_(filled in Task 6)_
+**Primary:** `superpowers:brainstorming` — hook-activates before creative work; refines a rough idea through Q&A and saves a design doc to `docs/superpowers/specs/`.
+**When to use:** You have a feature, change, or experiment in mind but haven't pinned down requirements, scope, or alternatives.
+**Alternatives:**
+- `compound-engineering` `/ce-ideate` + `/ce-brainstorm` — divergent generation + critique then interactive refinement; better when you want the system to surface candidate ideas first.
+- Plain conversation — fine for trivial / obvious changes that don't warrant a spec.
+**Registry:** [`superpowers`](agent-tooling.md#superpowers)
 
 ### 1.2 Research
-
-_(filled in Task 6)_
+**Primary:** `compound-engineering` `ce-web-researcher` sub-agent — iterative web research that returns structured external grounding (prior art, market signals, cross-domain analogies) instead of a raw link list.
+**When to use:** You need synthesized external context — competitor scans, prior art, or "what's the state of X in 2026" — to inform ideation, planning, or framing.
+**Alternatives:**
+- Built-in `WebSearch` + `WebFetch` — ad-hoc queries when you need links, not synthesis.
+- Exa / Tavily / Firecrawl MCPs — *(not installed; require paid API keys, declined per project preference)*.
+**Registry:** [`compound-engineering`](agent-tooling.md#compound-engineering)
 
 ### 1.3 Product requirements (PRDs)
-
-_(filled in Task 6)_
+**Primary:** `prd-taskmaster` skill — discovery interview → codebase analysis → detailed PRD with 13 quality checks; bridges naturally into a task breakdown for Build (3.1).
+**When to use:** A product-shaped change that's big enough that "what to build" isn't obvious from the issue title — real users, success metrics, multiple stakeholders. Save output to `docs/prds/`.
+**Alternatives:**
+- `compound-engineering` `/ce-brainstorm` → `/ce-plan` — lighter loop; better for solo / internal work where ceremony around a full PRD is overhead.
+- Skip the PRD — small fixes, refactors, and obvious features don't need one (per `docs/prds/README.md`).
+**Registry:** [`prd-taskmaster`](agent-tooling.md#prd-taskmaster)
 
 ## 2. Design
 
