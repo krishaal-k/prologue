@@ -50,12 +50,22 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 ## 2. Design
 
 ### 2.1 UI/UX & prototyping
-
-_(filled in Task 7)_
+**Primary:** `compound-engineering` `ce-frontend-design` — opinionated builder for distinctive web interfaces (composition, typography, color, motion, copy); detects existing design system, verifies via screenshots before declaring done.
+**When to use:** Any frontend work — landing page, page section, interactive component, or visual refresh — where "looks generically AI-ish" is a real risk.
+**Alternatives:**
+- `frontend-design:frontend-design` (Anthropic plugin) — same problem space, simpler scope; reach for it when you want one-shot polish on a single component.
+- `magicui` MCP — when you specifically want animated React + Tailwind primitives (marquees, blur fades, beams) to drop into a hero / showcase.
+- Plain conversation + Tailwind v4 — for tiny tweaks where invoking a design skill is overkill.
+**Registry:** [`compound-engineering`](agent-tooling.md#compound-engineering) · [`frontend-design`](agent-tooling.md#frontend-design) · [`magicui`](agent-tooling.md#magicui)
 
 ### 2.2 Architecture, technical requirements & specs
-
-_(filled in Task 7)_
+**Primary:** `superpowers:writing-plans` — produces a structured implementation plan with files, steps, and verification before code; pairs directly with `superpowers:subagent-driven-development` and `superpowers:executing-plans`.
+**When to use:** A non-trivial change with >2 steps, multiple files, or any architectural choice. Save output to `docs/plans/active/` per project convention.
+**Alternatives:**
+- `compound-engineering` `/ce-plan` — better when the plan is non-software (research workflows, study plans) or when you want to deepen an existing plan with parallel sub-agent review.
+- `c4-architecture:c4-architecture` — when you specifically need C4 diagrams (Context / Container / Component / Code) for a system you're documenting or onboarding to.
+- `superpowers:brainstorming` first if the spec / requirements aren't clear yet.
+**Registry:** [`superpowers`](agent-tooling.md#superpowers) · [`compound-engineering`](agent-tooling.md#compound-engineering) · [`c4-architecture`](agent-tooling.md#c4-architecture)
 
 ## 3. Build
 

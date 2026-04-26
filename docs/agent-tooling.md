@@ -32,6 +32,14 @@ The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflo
 - Type: skill · scope: user · source: `anombyte93/prd-taskmaster` (cloned to `~/.claude/skills/prd-taskmaster`)
 - Discovery interview → codebase analysis → detailed PRD with 13 automated quality checks; bridges to TaskMaster task breakdown.
 
+### `frontend-design`
+- Type: plugin · scope: user · source: `claude-plugins-official`
+- Anthropic's official frontend-design skill. Forces distinctive aesthetic, typography, palettes — antidote to generic AI look. Surfaces `frontend-design:frontend-design`.
+
+### `c4-architecture`
+- Type: plugin · scope: user · source: `wshobson/agents` (added as `claude-code-workflows` marketplace)
+- Generates C4 architecture documentation (Context, Container, Component, Code) from a codebase via four coordinated agents.
+
 ## MCP servers
 
 ### `rubberduck-mcp`
@@ -42,6 +50,10 @@ The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflo
 ### `playwright`
 - Source: Microsoft Playwright MCP (default config)
 - Browser automation, screenshots, console / network capture, snapshots, navigation.
+
+### `magicui`
+- Source: `@magicuidesign/mcp` (npm, official, registered via `claude mcp add magicui`)
+- Magic UI component metadata + scaffolds for animated React + Tailwind primitives (marquees, blur fades, beams, etc.).
 
 ### `ide`
 - Source: built-in (default config)
@@ -80,3 +92,6 @@ These appear once here; surfaced in `workflow.md`'s top-of-file callout (not per
 - Playwright MCP — https://github.com/microsoft/playwright-mcp
 - Compound Engineering — https://github.com/EveryInc/compound-engineering-plugin
 - prd-taskmaster — https://github.com/anombyte93/prd-taskmaster
+- frontend-design — https://github.com/anthropics/claude-plugins-official
+- wshobson/agents (c4-architecture host) — https://github.com/wshobson/agents
+- Magic UI MCP — https://github.com/magicuidesign/magicui
