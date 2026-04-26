@@ -41,3 +41,47 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const all = await getAllPosts();
   return all.find((p) => p.slug === slug) ?? null;
 }
+
+export type Project = {
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  status: "live" | "wip" | "archived";
+  links: { github?: string; live?: string; writeup?: string };
+  tech: string[];
+  cover?: string;
+  body: string;
+};
+
+const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
+
+export async function getAllProjects(): Promise<Project[]> {
+  const files = await fs.readdir(PROJECTS_DIR);
+  const projects = await Promise.all(
+    files
+      .filter((f) => f.endsWith(".mdx"))
+      .map(async (file): Promise<Project> => {
+        const raw = await fs.readFile(path.join(PROJECTS_DIR, file), "utf8");
+        const { data, content } = matter(raw);
+        const status = data.status === "live" || data.status === "archived" ? data.status : "wip";
+        return {
+          slug: file.replace(/\.mdx$/, ""),
+          title: String(data.title),
+          date: String(data.date),
+          summary: String(data.summary),
+          status,
+          links: typeof data.links === "object" && data.links !== null ? data.links : {},
+          tech: Array.isArray(data.tech) ? data.tech.map(String) : [],
+          cover: typeof data.cover === "string" ? data.cover : undefined,
+          body: content,
+        };
+      }),
+  );
+  return projects.sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const all = await getAllProjects();
+  return all.find((p) => p.slug === slug) ?? null;
+}

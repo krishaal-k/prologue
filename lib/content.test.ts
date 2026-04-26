@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getAllPosts, getPostBySlug } from "./content";
+import { getAllPosts, getPostBySlug, getAllProjects, getProjectBySlug } from "./content";
 
 describe("getAllPosts", () => {
   it("returns the seed welcome post with parsed frontmatter", async () => {
@@ -31,5 +31,25 @@ describe("getPostBySlug", () => {
   it("returns null when slug does not exist", async () => {
     const post = await getPostBySlug("nonexistent-slug");
     expect(post).toBeNull();
+  });
+});
+
+describe("getAllProjects", () => {
+  it("returns the seed my-prologue project with parsed frontmatter", async () => {
+    const projects = await getAllProjects();
+    const me = projects.find((p) => p.slug === "my-prologue");
+
+    expect(me).toBeDefined();
+    expect(me?.title).toBe("My Prologue");
+    expect(me?.status).toBe("wip");
+    expect(me?.links?.github).toMatch(/^https?:\/\//);
+    expect(me?.tech).toContain("next");
+  });
+});
+
+describe("getProjectBySlug", () => {
+  it("returns null when slug does not exist", async () => {
+    const project = await getProjectBySlug("nope");
+    expect(project).toBeNull();
   });
 });
