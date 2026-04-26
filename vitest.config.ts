@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     tsconfigPaths: true,
+    alias: {
+      "server-only": "/Users/kk-mac/prologue/vitest.server-only-stub.ts",
+    },
   },
   test: {
     environment: 'jsdom',
