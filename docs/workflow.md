@@ -127,9 +127,16 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 > **Active-stage emphasis:** this phase stays brief until you actually have something running in production. Each sub-section names the activity and one starter tool; expand when production-stage.
 
 ### 5.1 Integration & deploy
-
-_(filled in Task 10)_
+**Primary:** `vercel` MCP — official remote MCP at `https://mcp.vercel.com`. OAuth on first use; read-only by default. Lets Claude Code list projects / deployments, pull build and runtime logs, and search Vercel docs without hand-pasting URLs.
+**When to use:** A deploy has failed, a preview URL is misbehaving, or you need to confirm an env var or build setting on Vercel.
+**Alternatives:**
+- Vercel dashboard in the browser — when you need a chart, a settings UI, or a multi-step wizard the MCP doesn't expose.
+**Registry:** [`vercel`](agent-tooling.md#vercel)
 
 ### 5.2 Monitor & maintain
-
-_(filled in Task 10)_
+**Primary:** _(deferred)_ — pre-production. No users, no traffic, no error stream. Re-evaluate the day `@sentry/nextjs` (or equivalent) lands in `package.json`.
+**When to use:** Once the portfolio has real users and an error stream, install the pre-vetted starter below and document the on-call loop in `docs/runbooks/`.
+**Alternatives:**
+- Sentry MCP — `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp` *(not installed; install on day one of prod)*.
+- Vercel deploy logs — already covered by `vercel` MCP in 5.1; sufficient until real observability is needed.
+**Registry:** _(no install yet — revisit when production-stage)_
