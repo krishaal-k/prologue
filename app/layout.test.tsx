@@ -13,4 +13,9 @@ describe("layout", () => {
     expect(metadata.title).toBe("My Prologue");
     expect(metadata.description).toMatch(/building in public/i);
   });
+
+  it("sets metadataBase to the production origin so relative OG URLs resolve absolutely", () => {
+    expect(metadata.metadataBase).toBeInstanceOf(URL);
+    expect(metadata.metadataBase?.toString()).toBe("https://www.krishaal.dev/");
+  });
 });
