@@ -28,9 +28,13 @@ pnpm test:e2e:ui    # Playwright in UI mode for debugging
 ## Architecture
 
 - App lives in `/app` (no `/src` wrapper). Route segments are directories under `/app`.
-- `app/layout.tsx` — root layout, loads Geist fonts, wraps all pages.
-- `app/page.tsx` — home page.
-- `app/globals.css` — Tailwind v4 import + CSS custom properties for light/dark theme.
+- `app/layout.tsx` — root layout, loads Geist + Fraunces fonts, wraps all pages.
+- `app/page.tsx` — cinematic landing (click/keyboard anywhere → `/home`). Not the home page.
+- `app/home/page.tsx` — actual home: sidebar + mission + recent posts.
+- `app/{blog,projects,about}/` — content routes; `[slug]` pages render MDX.
+- `app/globals.css` — Tailwind v4 `@import` + theme tokens (paper / accent / surface / bg / muted / border) under `@theme`.
+- `content/blogs/*.mdx` and `content/projects/*.mdx` — MDX collections, parsed by `lib/content.ts` (gray-matter + next-mdx-remote). No CMS.
+- `components/{shell,content,landing}/` — UI building blocks; `hooks/` — shared hooks (e.g. `usePrefersReducedMotion`).
 - No state management library is installed.
 
 ## Tooling
