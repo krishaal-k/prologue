@@ -1,6 +1,6 @@
 # Agent Tooling Registry
 
-_Last updated: 2026-04-27_
+_Last updated: 2026-04-27 (deploy day)_
 
 The **"where it lives"** doc. For **"when to use"**, see [`workflow.md`](workflow.md).
 
@@ -89,8 +89,8 @@ These appear once here; surfaced in `workflow.md`'s top-of-file callout (not per
 
 ## Project-local config
 
-- `.claude/settings.local.json` — project permission allowlist
-- `.claude/settings.json` — enabled plugins (e.g. `codex@openai-codex`)
+- `.claude/settings.json` — committed config: `enabledPlugins` (e.g. `codex@openai-codex`) + `permissions.allow` (project-scoped allowlist for read-only dev tools)
+- `.claude/settings.local.json` — uncommitted, accumulated per-session approvals; not tracked by git
 - `.claude/tdd-guard/data/instructions.md` — TDD-Guard project rules
 - `vitest.config.ts`, `vitest.setup.ts`, `playwright.config.ts` — test runner configs
 - `docs/plans/{active,completed,abandoned}/` — implementation plans (only `active/` auto-loads)

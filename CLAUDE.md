@@ -46,6 +46,14 @@ Project-scoped agent tooling beyond the global config:
 - **Codex plugin** (`codex@openai-codex`, project-scoped) — `/codex:rescue` to hand a stuck task or deeper investigation to GPT-5/Codex; `/codex:review` and `/codex:adversarial-review` for second-opinion review of pending changes. The `codex-rescue` subagent is also available via the Agent tool.
 - **Rubber Duck MCP** (`mcp-rubber-duck`) — exposes MCP tools that let Claude consult Claude/Codex/Gemini CLIs as "ducks" for quick second opinions inline (lighter-weight than spawning the rescue subagent).
 
+## Deploy
+
+Hosted on Vercel, linked to GitHub at `krishaal-k/prologue`:
+
+- Pushes to `main` → production at [`www.krishaal.dev`](https://www.krishaal.dev) (also `prologue-rho.vercel.app`).
+- Pushes to any other branch → automatic preview URL (visible in the Vercel dashboard's "Active Branches").
+- No `vercel.json` or `.vercel/` checked in — Vercel auto-detects Next.js. If a deploy fails, the dashboard at vercel.com is the source of truth for build / runtime logs. The `vercel` MCP can pull those logs once authenticated.
+
 ## Plans
 
 Implementation plans live in `docs/plans/{active,completed,abandoned}/` with filenames `YYYY-MM-DD-HHMM-{slug}.md`. When entering plan mode for new work, save there (not the Claude Code default `~/.claude/plans/` location). Move between subfolders to update status. Only `active/` is auto-loaded into context; `completed/` and `abandoned/` are reference-only — read on request.

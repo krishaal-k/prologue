@@ -1,6 +1,6 @@
 # Agent Workflow Reference
 
-_Last updated: 2026-04-27_
+_Last updated: 2026-04-27 (deploy day)_
 
 When you're at step **X**, reach for tool **Y**. For where each tool lives and how it's installed, see [`agent-tooling.md`](agent-tooling.md).
 
@@ -134,7 +134,7 @@ When you're at step **X**, reach for tool **Y**. For where each tool lives and h
 **Registry:** [`vercel`](agent-tooling.md#vercel)
 
 ### 5.2 Monitor & maintain
-**Primary:** _(deferred)_ — pre-production. No users, no traffic, no error stream. Re-evaluate the day `@sentry/nextjs` (or equivalent) lands in `package.json`.
+**Primary:** _(deferred)_ — site is deployed at [www.krishaal.dev](https://www.krishaal.dev) but has no real users, no traffic stream, and no error volume to watch. Re-evaluate the day `@sentry/nextjs` (or equivalent) lands in `package.json`.
 **When to use:** Once the portfolio has real users and an error stream, install the pre-vetted starter below and document the on-call loop in `docs/runbooks/`.
 **Alternatives:**
 - Sentry MCP — `claude mcp add --transport http sentry https://mcp.sentry.dev/mcp` *(not installed; install on day one of prod)*.
