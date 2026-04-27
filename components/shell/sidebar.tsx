@@ -26,7 +26,7 @@ export function Sidebar({ blogs, projects }: SidebarProps) {
       </Link>
       <nav className="flex flex-col">
         <NavTrigger open={openBlogs} onToggle={() => setOpenBlogs((v) => !v)}>
-          Blogs
+          Blog
         </NavTrigger>
         <CascadeList
           entries={blogs}

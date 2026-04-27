@@ -12,7 +12,7 @@ describe("getAllPosts", () => {
     expect(welcome?.title).toBe("Welcome to My Prologue");
     expect(welcome?.summary).toMatch(/building in public/i);
     expect(welcome?.tags).toEqual(["meta", "intro"]);
-    expect(welcome?.body).toMatch(/first post on My Prologue/i);
+    expect(welcome?.body).toMatch(/non-technical project manager/i);
   });
 
   it("returns posts sorted newest first by date", async () => {

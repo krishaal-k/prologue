@@ -1,10 +1,3 @@
----
-title: "Welcome to My Prologue"
-date: 2026-04-26
-summary: "Why I'm building in public, and what I expect to learn doing it."
-tags: ["meta", "intro"]
----
-
 I'm a non-technical project manager. I fell into the tech industry in 2020 when an old boss called me up to run delivery for a software consultancy. Since then I've been sitting alongside development teams in a scrum, product and project management capacity. Close enough to understand what's going on, but never actually building anything myself.
 
 That's always bugged me. I get my satisfaction from making things and seeing them work. Project and product management work has real depth to it but it's never motivated me the same way the idea of getting hands on has. For years, the complexity of learning to code felt too steep to climb in my spare time without some kind of formal path. So I just didn't.
@@ -19,9 +12,9 @@ Then work got busy and I could feel the momentum draining. So this past long wee
 
 I wanted a proper project. Something I could consistently put time into that would push me to keep learning, document the journey and hold myself accountable to it. I landed on a personal blog. Nothing groundbreaking but I was genuinely excited about it and I wanted to make it mine.
 
-Saturday the 25th was mostly thinking and reading. Sunday I got to work. I watched Matt Pocock's talk on AI coding workflow and made a real effort to understand fundamentals rather than just prompting my way through everything. The Discord bot taught me how quickly you can vibecode something into an unworkable mess. I didn't want that this time. So I set up a proper project space, named it Prologue, and got some structure in place using Claude Code.
+Saturday the 25th was mostly thinking and reading. Sunday I got to work. I watched [Matt Pocock's talk on AI coding workflow](https://www.youtube.com/watch?v=-QFHIoCo-Ko) and made a real effort to understand fundamentals rather than just prompting my way through everything. The Discord bot taught me how quickly you can vibecode something into an unworkable mess. I didn't want that this time. So I set up a proper project space, named it Prologue, and got some structure in place using Claude Code.
 
-Monday was Anzac Day here in New Zealand so I had one more day. I spent a good chunk of it overwhelmed by options. There's no shortage of frameworks, tools and opinions about the right way to do things and for a while I was going in circles trying to future-proof every decision. Eventually I just picked a direction and moved. I ended up building a workflow around Superpowers, wshobson's agents and EveryInc's compound engineering plugin, worked with Claude to design the site and put this thing together.
+Monday was Anzac Day here in New Zealand so I had one more day. I spent a good chunk of it overwhelmed by options. There's no shortage of frameworks, tools and opinions about the right way to do things and for a while I was going in circles trying to future-proof every decision. Eventually I just picked a direction and moved. I ended up building a workflow around [Superpowers](https://github.com/obra/superpowers), [wshobson's agents](https://github.com/wshobson/agents) and [EveryInc's compound engineering plugin](https://github.com/EveryInc/compound-engineering-plugin), worked with Claude to design the site and put this thing together.
 
 So here it is. There's a lot I want to get into from here. Architecture, testing, front-end development. I think the next thing I'll spend time on is design fundamentals because this place could probably do with a bit of a spruce up.
 
