@@ -21,7 +21,7 @@ pnpm test:e2e:ui    # Playwright in UI mode for debugging
 - **Next.js 16** — App Router only (no Pages Router). Read `node_modules/next/dist/docs/` before writing Next.js-specific code.
 - **React 19**
 - **TypeScript 5** — strict mode, path alias `@/*` → project root
-- **Tailwind CSS v4** — configured via `@tailwindcss/postcss` in `postcss.config.mjs`. There is no `tailwind.config.*` file; all theme customization goes through CSS `@theme` blocks. The `globals.css` uses `@import "tailwindcss"`, not `@tailwind base/components/utilities`.
+- **Tailwind CSS v4** — configured via `@tailwindcss/postcss` in `postcss.config.mjs`. There is no `tailwind.config.*` file; all theme customization goes through CSS `@theme` blocks. The `globals.css` uses `@import "tailwindcss"`, not `@tailwind base/components/utilities`. The `@tailwindcss/typography` plugin is loaded via `@plugin` in `globals.css`; the `.prose-prologue` class there overrides prose tokens to the site palette and Fraunces serif. Apply `prose prose-prologue` to any MDX surface for consistent long-form styling.
 - **ESLint 9** — flat config in `eslint.config.mjs`
 - **pnpm** — use `pnpm` for all package operations
 
@@ -34,6 +34,7 @@ pnpm test:e2e:ui    # Playwright in UI mode for debugging
 - `app/{blog,projects,about}/` — content routes; `[slug]` pages render MDX.
 - `app/globals.css` — Tailwind v4 `@import` + theme tokens (paper / accent / surface / bg / muted / border) under `@theme`.
 - `content/blogs/*.mdx` and `content/projects/*.mdx` — MDX collections, parsed by `lib/content.ts` (gray-matter + next-mdx-remote). No CMS.
+- `content/blogs/_drafts/` — Obsidian-authored `.md` drafts. Invisible to the site (only top-level `.mdx` is read). To publish, transform a draft into `content/blogs/<slug>.mdx` with frontmatter and move any images into `public/blog-assets/<slug>/`. See `content/blogs/_drafts/README.md` for the full workflow.
 - `components/{shell,content,landing}/` — UI building blocks; `hooks/` — shared hooks (e.g. `usePrefersReducedMotion`).
 - No state management library is installed.
 
