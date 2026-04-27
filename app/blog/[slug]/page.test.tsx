@@ -34,6 +34,14 @@ describe("BlogPost", () => {
     expect(screen.getByTestId("mdx").textContent).toBe("Body content here");
   });
 
+  it("renders the publish date in long format below the title", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    const time = screen.getByText("26 April 2026");
+    expect(time.tagName).toBe("TIME");
+    expect(time).toHaveAttribute("datetime", "2026-04-26");
+  });
+
   it("calls notFound for an unknown slug", async () => {
     await expect(BlogPost({ params: Promise.resolve({ slug: "missing" }) })).rejects.toThrow("NEXT_NOT_FOUND");
     expect(nav.notFound).toHaveBeenCalled();
