@@ -13,6 +13,16 @@ export type Post = {
   body: string;
 };
 
+function toIsoDate(value: unknown): string {
+  if (value instanceof Date) {
+    const yyyy = value.getUTCFullYear();
+    const mm = String(value.getUTCMonth() + 1).padStart(2, "0");
+    const dd = String(value.getUTCDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return String(value);
+}
+
 const BLOGS_DIR = path.join(process.cwd(), "content", "blogs");
 
 export async function getAllPosts(): Promise<Post[]> {
@@ -33,7 +43,7 @@ export async function getAllPosts(): Promise<Post[]> {
         return {
           slug: file.replace(/\.mdx$/, ""),
           title: String(data.title),
-          date: String(data.date),
+          date: toIsoDate(data.date),
           summary: String(data.summary),
           tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
           cover: typeof data.cover === "string" ? data.cover : undefined,
@@ -82,7 +92,7 @@ export async function getAllProjects(): Promise<Project[]> {
         return {
           slug: file.replace(/\.mdx$/, ""),
           title: String(data.title),
-          date: String(data.date),
+          date: toIsoDate(data.date),
           summary: String(data.summary),
           status,
           links: typeof data.links === "object" && data.links !== null ? data.links : {},

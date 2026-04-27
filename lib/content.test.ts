@@ -21,6 +21,12 @@ describe("getAllPosts", () => {
       expect(posts[i - 1].date >= posts[i].date).toBe(true);
     }
   });
+
+  it("returns dates as YYYY-MM-DD ISO strings, not localized Date strings", async () => {
+    const posts = await getAllPosts();
+    const welcome = posts.find((p) => p.slug === "welcome");
+    expect(welcome?.date).toBe("2026-04-26");
+  });
 });
 
 describe("getPostBySlug", () => {
