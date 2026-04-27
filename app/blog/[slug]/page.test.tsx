@@ -10,21 +10,21 @@ vi.mock("next-mdx-remote/rsc", () => ({
 }));
 vi.mock("../../../lib/content", () => ({
   getAllPosts: vi.fn().mockResolvedValue([
-    { slug: "welcome", title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: [], body: "Body content here" },
+    { slug: "welcome", title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: ["meta", "intro"], body: "Body content here" },
   ]),
   getAllProjects: vi.fn().mockResolvedValue([
     { slug: "my-prologue", title: "My Prologue", date: "2026-04-26", summary: "x", status: "wip", links: {}, tech: [], body: "" },
   ]),
   getPostBySlug: vi.fn().mockImplementation(async (slug: string) =>
     slug === "welcome"
-      ? { slug, title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: [], body: "Body content here" }
+      ? { slug, title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: ["meta", "intro"], body: "Body content here" }
       : null,
   ),
 }));
 
 import * as nav from "next/navigation";
 import * as content from "../../../lib/content";
-import BlogPost, { generateStaticParams } from "./page";
+import BlogPost, { generateStaticParams, generateMetadata } from "./page";
 
 describe("BlogPost", () => {
   it("renders the post title and the MDX body", async () => {
@@ -32,6 +32,34 @@ describe("BlogPost", () => {
     render(result);
     expect(screen.getByRole("heading", { name: "Welcome to My Prologue" })).toBeInTheDocument();
     expect(screen.getByTestId("mdx").textContent).toBe("Body content here");
+  });
+
+  it("renders the publish date in long format below the title", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    const time = screen.getByText("26 April 2026");
+    expect(time.tagName).toBe("TIME");
+    expect(time).toHaveAttribute("datetime", "2026-04-26");
+  });
+
+  it("renders tag chips for each tag in frontmatter", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    expect(screen.getByText("meta")).toBeInTheDocument();
+    expect(screen.getByText("intro")).toBeInTheDocument();
+  });
+
+  it("renders a back-to-blog link above the article", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    const link = screen.getByRole("link", { name: /back to blog/i });
+    expect(link).toHaveAttribute("href", "/blog");
+  });
+
+  it("renders a Krishaal sign-off after the post body", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    expect(screen.getByText("—Krishaal")).toBeInTheDocument();
   });
 
   it("calls notFound for an unknown slug", async () => {
@@ -53,5 +81,21 @@ describe("BlogPost", () => {
   it("fetches projects for the sidebar", async () => {
     await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
     expect(content.getAllProjects).toHaveBeenCalled();
+  });
+});
+
+describe("generateMetadata", () => {
+  it("returns title, description and OpenGraph fields for a known post", async () => {
+    const meta = await generateMetadata({ params: Promise.resolve({ slug: "welcome" }) });
+    expect(meta.title).toBe("Welcome to My Prologue");
+    expect(meta.description).toBe("x");
+    expect(meta.openGraph?.title).toBe("Welcome to My Prologue");
+    expect(meta.openGraph?.type).toBe("article");
+    expect(meta.twitter?.card).toBe("summary_large_image");
+  });
+
+  it("calls notFound when the slug does not exist", async () => {
+    await expect(generateMetadata({ params: Promise.resolve({ slug: "missing" }) })).rejects.toThrow("NEXT_NOT_FOUND");
+    expect(nav.notFound).toHaveBeenCalled();
   });
 });

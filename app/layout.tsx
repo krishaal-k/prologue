@@ -18,6 +18,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.krishaal.dev"),
   title: "My Prologue",
   description: "Building in public — a portfolio in motion.",
 };

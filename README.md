@@ -24,6 +24,15 @@ pnpm lint         # ESLint v9 flat config
 - `e2e/` — Playwright specs.
 - `public/landing/` — landing video + poster.
 
+## Authoring posts
+
+Drafts live in `content/blogs/_drafts/` and are invisible to the live site (`lib/content.ts` only reads top-level `*.mdx`). The flow:
+
+1. Write the post in Obsidian as `<slug>.md` inside `_drafts/`. Embedded links and drag-dropped images survive natively.
+2. Tell Claude "publish the latest draft" — it adds frontmatter, moves any images to `public/blog-assets/<slug>/`, and writes the final `content/blogs/<slug>.mdx`.
+
+See [`content/blogs/_drafts/README.md`](content/blogs/_drafts/README.md) for the full workflow.
+
 ## Documentation
 
 - [`CLAUDE.md`](CLAUDE.md) — commands, stack, and architecture briefing for AI agents working in this repo.

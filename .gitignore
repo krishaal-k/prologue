@@ -55,3 +55,6 @@ next-env.d.ts
 
 # Superpowers visual companion (brainstorming session artifacts)
 /.superpowers/
+
+# Obsidian vault config (local to each writer's setup)
+**/.obsidian/

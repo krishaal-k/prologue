@@ -1,10 +1,3 @@
----
-title: "Welcome to My Prologue"
-date: 2026-04-26
-summary: "Why I'm building in public, and what I expect to learn doing it."
-tags: ["meta", "intro"]
----
-
 I'm a non-technical project manager. I fell into the tech industry in 2020 when an old boss called me up to run delivery for a software consultancy. Since then I've been sitting alongside development teams in a scrum, product and project management capacity. Close enough to understand what's going on, but never actually building anything myself.
 
 That's always bugged me. I get my satisfaction from making things and seeing them work. Project and product management work has real depth to it but it's never motivated me the same way the idea of getting hands on has. For years, the complexity of learning to code felt too steep to climb in my spare time without some kind of formal path. So I just didn't.

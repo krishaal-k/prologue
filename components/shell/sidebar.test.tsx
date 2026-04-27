@@ -23,15 +23,15 @@ describe("Sidebar", () => {
     expect(brand).toHaveAttribute("href", "/home");
   });
 
-  it("does not show blog entries before the user expands Blogs", () => {
+  it("does not show blog entries before the user expands Blog", () => {
     render(<Sidebar blogs={blogs} projects={projects} />);
     expect(screen.queryByText("Welcome to My Prologue")).not.toBeInTheDocument();
   });
 
-  it("expands Blogs cascade on click and shows up to 10 entries", async () => {
+  it("expands Blog cascade on click and shows up to 10 entries", async () => {
     const user = userEvent.setup();
     render(<Sidebar blogs={blogs} projects={projects} />);
-    await user.click(screen.getByRole("button", { name: /^Blogs/i }));
+    await user.click(screen.getByRole("button", { name: /^Blog$/i }));
     expect(screen.getByText("Welcome to My Prologue")).toBeInTheDocument();
     expect(screen.getByText("Second Post")).toBeInTheDocument();
   });
@@ -39,16 +39,16 @@ describe("Sidebar", () => {
   it("collapses cascade on second click of the same parent", async () => {
     const user = userEvent.setup();
     render(<Sidebar blogs={blogs} projects={projects} />);
-    const blogsBtn = screen.getByRole("button", { name: /^Blogs/i });
+    const blogsBtn = screen.getByRole("button", { name: /^Blog$/i });
     await user.click(blogsBtn);
     await user.click(blogsBtn);
     expect(screen.queryByText("Welcome to My Prologue")).not.toBeInTheDocument();
   });
 
-  it("allows Blogs and Projects to be open simultaneously", async () => {
+  it("allows Blog and Projects to be open simultaneously", async () => {
     const user = userEvent.setup();
     render(<Sidebar blogs={blogs} projects={projects} />);
-    await user.click(screen.getByRole("button", { name: /^Blogs/i }));
+    await user.click(screen.getByRole("button", { name: /^Blog$/i }));
     await user.click(screen.getByRole("button", { name: /^Projects/i }));
     expect(screen.getByText("Welcome to My Prologue")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "My Prologue" })).toHaveAttribute(
@@ -60,7 +60,7 @@ describe("Sidebar", () => {
   it("links cascade entries to their slug pages", async () => {
     const user = userEvent.setup();
     render(<Sidebar blogs={blogs} projects={projects} />);
-    await user.click(screen.getByRole("button", { name: /^Blogs/i }));
+    await user.click(screen.getByRole("button", { name: /^Blog$/i }));
     expect(screen.getByRole("link", { name: "Welcome to My Prologue" })).toHaveAttribute(
       "href",
       "/blog/welcome",

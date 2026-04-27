@@ -29,7 +29,7 @@ export function NavTrigger({ open, onToggle, children }: NavTriggerProps) {
       className="flex justify-between items-center w-full px-6 py-2.5 text-sm text-paper hover:text-accent transition-colors"
     >
       <span>{children}</span>
-      <span>{open ? "▾" : "▸"}</span>
+      <span aria-hidden="true">{open ? "▾" : "▸"}</span>
     </button>
   );
 }

@@ -18,7 +18,7 @@ import HomePage from "./page";
 describe("HomePage", () => {
   it("renders mission text and the recent welcome post", async () => {
     render(await HomePage());
-    expect(screen.getByText(/learning to build/i)).toBeInTheDocument();
+    expect(screen.getByText(/teaching myself to build/i)).toBeInTheDocument();
     expect(screen.getByText("Welcome to My Prologue")).toBeInTheDocument();
   });
 });

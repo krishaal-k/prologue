@@ -14,12 +14,18 @@ export default async function HomePage() {
       />
       <main className="flex-1 p-12 max-w-4xl">
         <section className="mb-16">
-          <p className="text-xs uppercase tracking-[0.22em] text-muted mb-4">Mission</p>
+          <p className="text-xs uppercase tracking-[0.22em] text-muted mb-4">Welcome</p>
           <h1 className="font-serif text-4xl leading-tight text-paper mb-4">
-            You&rsquo;re not learning to code. You&rsquo;re learning to build.
+            This is my prologue. I have no idea what I&rsquo;m doing. Follow along.
           </h1>
+          <p className="font-serif text-lg text-muted mb-4">
+            I&rsquo;m teaching myself to build things. I don&rsquo;t know exactly what yet &mdash; but I&rsquo;m developing the skills, curiosity, and taste to figure it out along the way. The point is to make things I actually care about.
+          </p>
+          <p className="font-serif text-lg text-muted mb-4">
+            This site is where I think out loud. I&rsquo;ll be writing about what I&rsquo;m learning, what I&rsquo;m noticing as the technology landscape evolves, how I feel about it all, and what I&rsquo;m trying to build. My blog will be my voice &mdash; raw and unfiltered. Well, I&rsquo;ll probably get AI to tidy up the grammar so I don&rsquo;t look like an idiot, but that&rsquo;s it. I promise. The projects section is where I&rsquo;ll post the stuff I actually build.
+          </p>
           <p className="font-serif text-lg text-muted">
-            The portfolio is not the product. <span className="text-paper">You</span> are the product.
+            I&rsquo;ll be honest &mdash; this is mostly for me, but you&rsquo;re welcome to follow along.
           </p>
         </section>
 
