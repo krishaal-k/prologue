@@ -24,7 +24,7 @@ vi.mock("../../../lib/content", () => ({
 
 import * as nav from "next/navigation";
 import * as content from "../../../lib/content";
-import BlogPost, { generateStaticParams } from "./page";
+import BlogPost, { generateStaticParams, generateMetadata } from "./page";
 
 describe("BlogPost", () => {
   it("renders the post title and the MDX body", async () => {
@@ -81,5 +81,21 @@ describe("BlogPost", () => {
   it("fetches projects for the sidebar", async () => {
     await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
     expect(content.getAllProjects).toHaveBeenCalled();
+  });
+});
+
+describe("generateMetadata", () => {
+  it("returns title, description and OpenGraph fields for a known post", async () => {
+    const meta = await generateMetadata({ params: Promise.resolve({ slug: "welcome" }) });
+    expect(meta.title).toBe("Welcome to My Prologue");
+    expect(meta.description).toBe("x");
+    expect(meta.openGraph?.title).toBe("Welcome to My Prologue");
+    expect(meta.openGraph?.type).toBe("article");
+    expect(meta.twitter?.card).toBe("summary_large_image");
+  });
+
+  it("returns an empty object when the slug does not exist", async () => {
+    const meta = await generateMetadata({ params: Promise.resolve({ slug: "missing" }) });
+    expect(meta).toEqual({});
   });
 });

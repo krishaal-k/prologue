@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Sidebar } from "../../../components/shell/sidebar";
@@ -8,6 +9,29 @@ function formatDate(dateStr: string): string {
   return new Intl.DateTimeFormat("en-GB", { dateStyle: "long" }).format(
     new Date(dateStr),
   );
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> },
+): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  if (!post) return {};
+  return {
+    title: post.title,
+    description: post.summary,
+    openGraph: {
+      title: post.title,
+      description: post.summary,
+      type: "article",
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+    },
+  };
 }
 
 export async function generateStaticParams() {
