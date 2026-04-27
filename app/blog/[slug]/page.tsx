@@ -58,6 +58,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </div>
           )}
           <MdxContent source={post.body} />
+          <p className="font-serif text-lg text-muted mt-12">—Krishaal</p>
         </article>
       </main>
     </div>

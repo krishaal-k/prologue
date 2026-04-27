@@ -56,6 +56,12 @@ describe("BlogPost", () => {
     expect(link).toHaveAttribute("href", "/blog");
   });
 
+  it("renders a Krishaal sign-off after the post body", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    expect(screen.getByText("—Krishaal")).toBeInTheDocument();
+  });
+
   it("calls notFound for an unknown slug", async () => {
     await expect(BlogPost({ params: Promise.resolve({ slug: "missing" }) })).rejects.toThrow("NEXT_NOT_FOUND");
     expect(nav.notFound).toHaveBeenCalled();
