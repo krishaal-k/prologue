@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Sidebar } from "../../../components/shell/sidebar";
 import { MdxContent } from "../../../components/content/mdx-content";
@@ -30,6 +31,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         projects={allProjects.map(({ slug: s, title, date }) => ({ slug: s, title, date }))}
       />
       <main className="flex-1 p-12 max-w-3xl">
+        <Link
+          href="/blog"
+          className="inline-block text-xs uppercase tracking-[0.22em] text-muted hover:text-accent transition-colors mb-8"
+        >
+          ← Back to blog
+        </Link>
         <article className="prose prose-lg prose-prologue max-w-none">
           <h1 className="font-serif text-4xl text-paper mb-4">{post.title}</h1>
           <time

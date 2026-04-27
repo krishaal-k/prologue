@@ -49,6 +49,13 @@ describe("BlogPost", () => {
     expect(screen.getByText("intro")).toBeInTheDocument();
   });
 
+  it("renders a back-to-blog link above the article", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    const link = screen.getByRole("link", { name: /back to blog/i });
+    expect(link).toHaveAttribute("href", "/blog");
+  });
+
   it("calls notFound for an unknown slug", async () => {
     await expect(BlogPost({ params: Promise.resolve({ slug: "missing" }) })).rejects.toThrow("NEXT_NOT_FOUND");
     expect(nav.notFound).toHaveBeenCalled();
