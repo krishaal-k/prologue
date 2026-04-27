@@ -38,6 +38,18 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           >
             {formatDate(post.date)}
           </time>
+          {post.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-8">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center px-2 py-0.5 rounded text-[10px] uppercase tracking-[0.16em] bg-bg text-muted border border-border"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
           <MdxContent source={post.body} />
         </article>
       </main>

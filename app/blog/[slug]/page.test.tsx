@@ -10,14 +10,14 @@ vi.mock("next-mdx-remote/rsc", () => ({
 }));
 vi.mock("../../../lib/content", () => ({
   getAllPosts: vi.fn().mockResolvedValue([
-    { slug: "welcome", title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: [], body: "Body content here" },
+    { slug: "welcome", title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: ["meta", "intro"], body: "Body content here" },
   ]),
   getAllProjects: vi.fn().mockResolvedValue([
     { slug: "my-prologue", title: "My Prologue", date: "2026-04-26", summary: "x", status: "wip", links: {}, tech: [], body: "" },
   ]),
   getPostBySlug: vi.fn().mockImplementation(async (slug: string) =>
     slug === "welcome"
-      ? { slug, title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: [], body: "Body content here" }
+      ? { slug, title: "Welcome to My Prologue", date: "2026-04-26", summary: "x", tags: ["meta", "intro"], body: "Body content here" }
       : null,
   ),
 }));
@@ -40,6 +40,13 @@ describe("BlogPost", () => {
     const time = screen.getByText("26 April 2026");
     expect(time.tagName).toBe("TIME");
     expect(time).toHaveAttribute("datetime", "2026-04-26");
+  });
+
+  it("renders tag chips for each tag in frontmatter", async () => {
+    const result = await BlogPost({ params: Promise.resolve({ slug: "welcome" }) });
+    render(result);
+    expect(screen.getByText("meta")).toBeInTheDocument();
+    expect(screen.getByText("intro")).toBeInTheDocument();
   });
 
   it("calls notFound for an unknown slug", async () => {
