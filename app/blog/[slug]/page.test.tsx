@@ -94,8 +94,8 @@ describe("generateMetadata", () => {
     expect(meta.twitter?.card).toBe("summary_large_image");
   });
 
-  it("returns an empty object when the slug does not exist", async () => {
-    const meta = await generateMetadata({ params: Promise.resolve({ slug: "missing" }) });
-    expect(meta).toEqual({});
+  it("calls notFound when the slug does not exist", async () => {
+    await expect(generateMetadata({ params: Promise.resolve({ slug: "missing" }) })).rejects.toThrow("NEXT_NOT_FOUND");
+    expect(nav.notFound).toHaveBeenCalled();
   });
 });
